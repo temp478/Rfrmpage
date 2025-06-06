@@ -1,86 +1,176 @@
-body {
-    background-color: rgb(179, 179, 179);
-    color: rgb(255, 255, 255);
-    font-family: 'Arial Unicode MS', Arial, sans-serif;
-    font-size: 16px; /* Adjust this value to match are.na's font size */
-    margin-top: 35px;
-    padding: 0;
-    position: relative;
-    min-height: 100vh;
-    padding-bottom: 150px; /* Increase from 100px to accommodate footer */
-}
-
-.bio{
-    font: arial;
-    font-size: 0.6rem;
-    line-height: 90%;
-    position: fixed;
-    bottom: 10%;
-    overflow: hidden;
-    padding: 0.2%;
-    padding-left: 1%;
-    padding-right: 1%;
-text-align: justify;
-left: 20%;
-right: 20%;
-width: 50%;
-transform-origin: top left;
-transform: scale(1.3, 3); /* Change the scale for mobile devices */
-box-shadow: 0 0 20px rgb(255, 255, 255); /* Glowing effect */
-filter: blur(0);
-z-index: 1;
-
-}
-
-/* Bouncing animation */
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIFORMA CATALOGUE</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+    
+    .tele_ticker {
+        margin-top: 50%; /* Reduced from 50% */
+        position: fixed;
+        width: 100%;
+        overflow: visible;
     }
-    40% {
-        transform: translateY(-10px);
-    }
-    60% {
-        transform: translateY(-5px);
-    }
-}
+        .ticker-wrap {
+            width: 100%;
+            background: rgba(255, 255, 255, 0);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 5px 0;
+            overflow: hidden;
+            border-top: 1px solid rgba(238, 238, 238, 0);
+            border-bottom: 1px solid rgba(238, 238, 238, 0);
+         
+            cursor: pointer;
+        }
 
-/* Hover effect */
-.social-links:hover {
-    transform: rotate(-15deg) scale(1.3) skew(-10deg); /* Reverse rotation and increase size */
-    box-shadow: 0 0 30px rgba(0, 255, 13, 0.8); /* Stronger glow on hover */
-    filter: blur(2px); /* Apply blur effect */
+        .ticker {
+          
+            display: inline-block;
+            white-space: nowrap;
+            animation: ticker 100s linear infinite;
+            padding: 0;
+           
+        }
 
-}
+        .ticker:hover, .ticker-clone:hover {
+            animation-play-state: paused;
+            cursor: default;
+        }
 
-#blocks-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0px;
-    padding: 0px;
-    margin-top: 80px; /* Adjust based on your navbar height */
-    margin-bottom: 100px; /* Add bottom margin to ensure content doesn't get hidden by footer */
-}
+        .ticker__item {
+          
+            display: inline-block;
+            padding: 0 30px;
+            text-transform: uppercase;  
+            font-weight: bold;
+            user-select: none;
+            font-size: 16px; /* Match navbar font size */
+            /* Create gradient text effect */
+            background: linear-gradient(
+                90deg,
+                #000000,  /* Bright Red */
+                #ffffff,  /* Magenta */
+                #000000,  /* Cyan */
+                #1EFF1E,  /* Neon Green */
+                #f6f6f6,  /* Gold */
+                #000000   /* Back to Red */
+            );
+            background-size: 300% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: gradient 18s linear infinite;
+            text-shadow: 0 0 10px rgba(255,255,255,0.2);
+        }
 
-.block {
-    padding: 8px; /* Remove padding from the block */
-    border-radius: 0; /* No border radius */
-    overflow: hidden;
-    display: flex; /* Use flexbox for alignment */
-    flex-direction: column-reverse; /* Stack children vertically */
-    justify-content: flex-end; /* Align children to the bottom */
-}
+        /* Add gradient animation */
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 300% 50%;
+            }
+        }
 
-/*navbar options */
-.navbar {
-     position: fixed;
-    top: 0;
+        .ticker-clone {
+          
+            white-space: nowrap;
+            padding: 0;
+            animation: ticker 100s linear infinite;
+            animation-delay: -50s;
+        }
+
+        @keyframes ticker {
+            0% { transform: translate3d(100%, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
+
+        .loading-bar-container {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 100%;
+            height: 2px;
+            background-color: #f0f0f0;
+            z-index: 10;
+        }
+
+        .loading-bar {
+            height: 100%;
+            width: 2%;
+            background-color: #ff1e1e;
+            transition: width 1.2s;
+        }
+
+        /* Add styles for about overlay */
+        .about-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: black;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 1000;
+            cursor: pointer;
+            overflow-y: auto;
+        }
+
+        .about-content {
+            position: relative;
+            top: 50%;
+            left: 0;
+            transform: none;
+            width: 80%;
+            margin: 20px auto;
+            padding: 2em;
+            background: rgba(255, 255, 255, 0.406);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 0 20px rgb(251, 251, 251);
+            cursor: default;
+            text-align: justify;
+        }
+
+        .bio a, .about-content a {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.638);
+            transition: border-color 0.2s ease;
+        }
+
+        .bio a:hover, .about-content a:hover {
+            border-bottom-color: rgba(0,0,0,0.8);
+        }
+
+        /* Add mobile specific styles */
+        @media (max-width: 428px) {
+         
+            .tele_ticker {
+              position: fixed;
+               margin-top:40%; /* Even less margin on mobile */
+                width: 100%;
+            }
+            .title{ 
+              align-items: center;
+              font-size:18.5px;
+            }
+            .navbar{
+              position: fixed;
+    top: 0px;
     left: 0;
     width: 100%;
-    padding: 0px 20px; /* Add horizontal padding */
+    padding: 0px 0px; /* Add horizontal padding */
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: left;
     background-color: rgba(179, 179, 179, 0.8); /* Match body background with some transparency */
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -88,281 +178,398 @@ z-index: 1;
     font-family: 'Arial Unicode MS', Arial, sans-serif;
     font-size: 16px;
     z-index: 1000; /* Increase z-index to ensure it's above other elements */
-}
+            }
+            
+            .ticker__item {
+                font-size: 10px; /* Reduced from 14px to half the size */
+                padding: 0 0px; /* Reduced padding */
+            }
 
-.title {
-    font-size: 24px;
-    font-weight: bold;
-    line-height: 90%;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transform: scale(5, 2);
-    transform-origin: top left;
-}
+            .ticker-wrap {
+                padding: 0px 0; /* Slightly reduce height on mobile */
+            }
 
-.links {
-   position: relative;
-    display: flex;
-    align-items: center;
-    gap: 15px; /* Add gap between links instead of relying on space-between */
-    transform: scale(3, 2);
-    transform-origin: top right;
-    margin-right: 20px; /* Add right margin to prevent content from touching the edge */
-}
-
-
-@media (max-width: 1920px) {
-    .links {
-        transform: scale(2.2, 1);
-    }
-}
-
-@media (max-width: 810px) {
-    .links {
-        transform: scale(1.5, 1);
-    }
-}
-
-@media (max-width: 1600px) {
-    .links {
-        top: 2%;
-        transform: scale(2, 1); /* Change the scale for mobile devices */
-    }
-}
-
-@media (max-width: 375px) {
-    .links {
-        transform: scale(1, 1);
-        position: relative; /* Keep it relative */
-        top: auto;
-        right: auto;
-    }
-
-        .bio {
-            display: none;
+            .about-content {
+              position: fixed;
+              top: 30%;
+                width: 90%;
+                padding: 1.5em;
+                margin: 10px auto;
+                font-size: 14px;
+                line-height: 1.4;
+            }
         }
+    </style>
+</head>
 
+<body autoscroll="autoscroll">
+    <div id="blocks-container"></div>
+    <div class="navbar">
+      <div class="title">Riforma Catalogue<br></div>
+      <div class="links">
+        <a href="https://riformalabel.cargo.site/contact-form">contacts</a>
+        <a href="#" id="about-trigger">about</a>
+        <a href="https://t.me/riformalabel" target="_blank">telegram</a>
+        <span> &ensp;&ensp;&ensp;2020&rarr;2025</span>
         
-}
+        <div class="" href="#" id="channel-link" style="display: none;"></div>
+        
+      </div>
+      <div class="tele_ticker">
+        <a href="https://t.me/riformalabel" target="_blank">
+          <div class="ticker-wrap">
+            <div class="loading-bar-container" id="loading-bar-container">
+              <div class="loading-bar" id="loading-bar"></div>
+            </div>
+            <div class="ticker" id="telegram-ticker">
+              <div class="ticker__item">loading news...</div>
+            </div>
+            <div class="ticker-clone" id="telegram-ticker-clone">
+              <div class="ticker__item">loading news...</div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+            <div class="" href="#" id="channel-link" style="display: none;"></div>
 
-@media (max-width: 428px) {
-    .links {
-        transform: scale(1.5, 1);
-        position: relative;
-        top: auto;
-    }
-}
+    <div class="bio">Riforma is an experimental music label based in Turin and Berlin, curated by <a href="https://kinked.bandcamp.com" target="_blank">Kinked</a>, <a href="https://adrianocava.bandcamp.com" target="_blank">Adriano Cava</a>, and <a href="https://riforma.bandcamp.com/album/re-malta-orlata" target="_blank">NOT399093</a>.
+      Dedicated to digital and tape releases, the practice of Riforma experiments different tools of expressions on medias such as paper, videos and hybridized formats.
+      The label catalogue is grounded inside and beyond the <a href="https://newweirditalia.cargo.site" target="_blank">New Weird Italia network</a>, shaped by an extensive experience hosting happenings, concerts and radio broadcastings in independent and secret venues/spaces both in Rome and Turin.
+      
+      From Tenco-Grime to Hyper-weirdness, posthuman sonic features to Abstract Concretism, FFT-Materialism to Glo-fi, the label encompasses and showcases a wide range of styles including: glidecore, screwgaze, blisscutters, derives of musique concrete and tape-ballardism.
+      
+      
+</div>
 
-@media (max-width: 414px) {
-    .links {
-        transform: scale(1.3, 1);
-    }
-}
+    <div id="about-overlay" class="about-overlay">
+        <div class="about-content">
+            <div id="about-text">
+                Riforma is an experimental music label based in Turin and Berlin, curated by <a href="https://kinked.bandcamp.com" target="_blank">Kinked</a>, <a href="https://adrianocava.bandcamp.com" target="_blank">Adriano Cava</a>, and <a href="https://riforma.bandcamp.com/album/re-malta-orlata" target="_blank">NOT399093</a>.
+                Dedicated to digital and tape releases, the practice of Riforma experiments different tools of expressions on medias such as paper, videos and hybridized formats.
+                The label catalogue is grounded inside and beyond the <a href="https://newweirditalia.cargo.site" target="_blank">New Weird Italia network</a>, shaped by an extensive experience hosting happenings, concerts and radio broadcastings in independent and secret venues/spaces both in Rome and Turin.
+                
+                From Tenco-Grime to Hyper-weirdness, posthuman sonic features to Abstract Concretism, FFT-Materialism to Glo-fi, the label encompasses and showcases a wide range of styles including: glidecore, screwgaze, blisscutters, derives of musique concrete and tape-ballardism.
+            </div>
+        </div>
+    </div>
 
-.links a {
-    color: white;
-    text-decoration: none;
-    margin-left: 20px;
-}
+    <div id="blocks-container"></div>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-.links a {
-    color: #1eff00; /* Base link color */
-    text-decoration: none; /* Remove underline by default */
-    transition: color 0.3s ease, filter 0.3s ease; /* Smooth transition for color and blur */
-    display: inline-block; /* Required for transform effects */
-}
-
-.links a:hover {
-    text-decoration: underline; /* Underline on hover */
-    color: rgb(255, 255, 255); /* Change color to red */
-    filter: blur(2px); /* Apply blur effect */
-    transition: color 0.5s ease, filter 0.3s ease; /* Smooth transition for color and blur */
-}
-
-.block img {
-    max-width: 100%;
-    border-radius: 0px;
-}
-
-.block a {
-    color: #1e90ff;
-    text-decoration: none;
-}
-
-.block a {
-    color: #40ff00; /* Base link color */
-    text-decoration: none; /* No underline by default */
-    transition: color 0.3s ease, filter 0.3s ease; /* Smooth transition for color and blur */
-}
-
-.block a:hover {
-    text-decoration: none; /* Keep no underline on hover */
-    color: rgb(255, 255, 255); /* Change color to red */
-}
-.block {
-    font-size: 0.9rem;
-    color: rgb(255, 255, 255); /* Change color to white */
-    position: relative;
-    overflow: hidden; /* Hide overflow for color reveal */
-    filter: grayscale(100%); /* Start with black and white */
-    transition: filter 0.3s ease; /* Smooth transition for grayscale */
-}
-
-.block img {
-    max-width: 100%;
-    border-radius: 0px;
-}
-
-.block a {
-    color: #40ff00; /* Base link color */
-    text-decoration: none; /* No underline by default */
-    transition: color 0.3s ease; /* Smooth transition for color */
-}
-
-.block:hover {
-    filter: grayscale(0%); /* Remove grayscale on hover */
-}
-
-.thumbnail {
-    max-width: 100%;
-    border-radius: 0px;
-}
-
-/* Mobile styles */
-/* Mobile styles */
-@media (max-width: 1096px) {
-    body {
-        font-size: 12px;
-        padding-left: 1%;
-        padding-right: 1%;
-        padding-top: 2%;
-        padding-bottom: 120px; /* Increase padding to ensure content isn't hidden by footer */
-    }
    
-    #blocks-container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0px;
-        padding-top: 30px;
-        margin-bottom: 120px; /* Add bottom margin for mobile */
-    }
-
-    .block {
-        padding: 4px; /* Adjust padding for mobile if needed */
-    }
-
-    figure {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .block {
-        position: relative;
-        overflow: hidden; /* Hide overflow for color reveal */
-        filter: grayscale(100%); /* Start with black and white */
-        transition: filter 0.3s ease; /* Smooth transition for grayscale */
-    }
-
-    .block img {
-        max-width: 100%;
-        border-radius: 0px;
-    }
-
-    .block a {
-        color: #40ff00; /* Base link color */
-        text-decoration: none; /* No underline by default */
-        transition: color 0.3s ease; /* Smooth transition for color */
-    }
-
-    .block a:hover {
-        color: rgb(255, 255, 255); /* Change color to white */
-    }
-
-    .block:hover {
-        filter: grayscale(0%); /* Remove grayscale on hover */
-    }
-
-    /* Aggiungi gli effetti hover per i link */
-    .links a {
-        color: #1eff00; /* Base link color */
-        text-decoration: none; /* Remove underline by default */
-        transition: color 0.3s ease, filter 0.3s ease; /* Smooth transition for color and blur */
-        display: inline-block; /* Required for transform effects */
-    }
-
-    .links a:hover {
-        text-decoration: underline; /* Underline on hover */
-        color: rgb(255, 255, 255); /* Change color to white */
-        transition: color 0.5s ease, filter 0.3s ease; /* Smooth transition for color and blur */
-    }
-
-    .channel-name {
-        display: block; /* Ensure it takes up its own line */
-        text-align: center; /* Center the text */
-        margin-top: 10px; /* Add some space above */
-        font-size: 1.2rem; /* Adjust font size as needed */
-    }
-
-    .title {
-      font-size: 1.2rem;
-        margin-bottom: 20px; /* Add space below the title */
-        mix-blend-mode: normal;
-    }
-
-    .links {
-        position: fixed; /* Change from fixed to relative */
-        top: auto; /* Reset top positioning */
-        transform: scale(1, 1); /* Reset scaling */
-        margin-top: 20px; /* Add margin to create space below the title */
-    text-align: center;
+  <script>
+    // Channel configuration - NO API TOKEN NEEDED!
+    const CHANNEL_USERNAME = "rfrm22q"; 
+    
+    // Flag to track if loading is complete
+    let contentLoaded = false;
+    
+    // Fetch the latest messages from the public Telegram web version
+    async function fetchTelegramPosts() {
+      try {
+        // Reset loading flag
+        contentLoaded = false;
+        
+        // Show loading message while fetching
+        updateTickerWithLoading();
+        
+        // Start a loading animation that continues until content is loaded
+        startLoadingAnimation();
+        
+        // Try multiple CORS proxies in sequence until one works
+        const proxies = [
+          'https://api.allorigins.win/raw?url=',
+          'https://cors-anywhere.herokuapp.com/',
+          'https://corsproxy.io/?'
+        ];
+        
+        const telegramPublicUrl = `https://t.me/s/${CHANNEL_USERNAME}`;
+        
+        // Show the loading bar container
+        document.getElementById('loading-bar-container').style.display = 'block';
+        let loadingProgress = 0;
+        
+        // Start updating the loading bar
+        const loadingInterval = setInterval(() => {
+          loadingProgress += 2; // Increment progress
+          if (loadingProgress > 90) {
+            loadingProgress = 90; // Cap at 90% until actually loaded
+          }
+          document.getElementById('loading-bar').style.width = loadingProgress + '%';
+        }, 100);
+        
+        // Try each proxy in turn
+        let html = null;
+        let proxyUsed = null;
+        
+        for (const proxy of proxies) {
+          try {
+            console.log(`Trying proxy: ${proxy}`);
+            const finalUrl = proxy.includes('?url=') 
+              ? proxy + encodeURIComponent(telegramPublicUrl)
+              : proxy + telegramPublicUrl;
+              
+            const response = await fetch(finalUrl);
+            
+            if (response.ok) {
+              html = await response.text();
+              proxyUsed = proxy;
+              console.log(`Success with proxy: ${proxy}`);
+              break;
+            }
+          } catch (proxyError) {
+            console.log(`Proxy ${proxy} failed:`, proxyError);
+            // Continue to the next proxy
+          }
+        }
+        
+        if (!html) {
+          throw new Error("All proxies failed");
+        }
+        
+        // Parse the HTML response to extract messages
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        
+        // Extract messages from the Telegram web page
+        // Try different selectors that might match message text
+        const selectors = [
+          '.tgme_widget_message_text', 
+          '.tgme_widget_message_bubble', 
+          '.js-message_text'
+        ];
+        
+        let messageElements = [];
+        
+        for (const selector of selectors) {
+          const elements = doc.querySelectorAll(selector);
+          if (elements && elements.length > 0) {
+            messageElements = elements;
+            console.log(`Found ${elements.length} messages with selector: ${selector}`);
+            break;
+          }
+        }
+        
+        if (messageElements.length > 0) {
+          // Convert the NodeList to an array of message objects
+          const messages = Array.from(messageElements)
+            .map(element => ({
+              text: element.textContent.trim()
+            }))
+            .filter(msg => {
+              // Filter out empty messages
+              if (!msg.text) return false;
+              
+              // Filter out administrative messages
+              const adminMessages = [
+                "channel created",
+                "invited by",
+                "joined the channel",
+                "changed the channel",
+                "changed channel",
+                "pinned a message",
+                "changed the chat photo",
+                "changed the group photo",
+                "the group was renamed",
+                "the channel was renamed",
+                "changed group name",
+                "changed channel name",
+                "added a new admin",
+                "removed an admin",
+                "added admin",
+                "removed admin",
+                "created the group",
+                "created the channel"
+              ];
+              
+              // Check if the message contains any of the admin phrases
+              const lowerCaseText = msg.text.toLowerCase();
+              return !adminMessages.some(phrase => lowerCaseText.includes(phrase.toLowerCase()));
+            });
+          
+          // If we have actual content messages after filtering
+          if (messages.length > 0) {
+            // Complete the loading bar
+            document.getElementById('loading-bar').style.width = '100%';
+            
+            // Wait a moment with 100% loading bar
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            // Mark content as loaded and update ticker
+            contentLoaded = true;
+            clearInterval(loadingInterval);
+            
+            // Hide the loading bar after a short delay
+            setTimeout(() => {
+              document.getElementById('loading-bar-container').style.display = 'none';
+            }, 500);
+            
+            updateTicker(messages);
+          } else {
+            // If all were admin messages, show static content
+            // Complete the loading bar
+            document.getElementById('loading-bar').style.width = '100%';
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            contentLoaded = true;
+            clearInterval(loadingInterval);
+            
+            // Hide the loading bar after a short delay
+            setTimeout(() => {
+              document.getElementById('loading-bar-container').style.display = 'none';
+            }, 500);
+            
+            showStaticContent();
+          }
+        } else {
+          console.log("No message elements found in HTML");
+          
+          // Complete the loading bar
+          document.getElementById('loading-bar').style.width = '100%';
+          await new Promise(resolve => setTimeout(resolve, 500));
+          
+          contentLoaded = true;
+          clearInterval(loadingInterval);
+          
+          // Hide the loading bar after a short delay
+          setTimeout(() => {
+            document.getElementById('loading-bar-container').style.display = 'none';
+          }, 500);
+          
+          showStaticContent();
+        }
+      } catch (error) {
+        console.error("Error fetching Telegram posts:", error);
+        
+        // Complete the loading bar
+        document.getElementById('loading-bar').style.width = '100%';
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        contentLoaded = true;
+        
+        // Clear any loading intervals
+        clearInterval(loadingInterval);
+        
+        // Hide the loading bar after a short delay
+        setTimeout(() => {
+          document.getElementById('loading-bar-container').style.display = 'none';
+        }, 500);
+        
+        showStaticContent();
       }
-}
+    }
+    
+    // Track when loading starts
+    let loadingStartTime = 0;
+    let loadingInterval;
+    
+    // Start loading animation that continues until content is loaded
+    function startLoadingAnimation() {
+      loadingStartTime = Date.now();
+      
+      // Show loading message while content loads
+      updateTickerWithLoading();
+      
+      // Reset the loading bar
+      document.getElementById('loading-bar').style.width = '0%';
+      document.getElementById('loading-bar-container').style.display = 'block';
+    }
+    
+    // Show loading message
+    function updateTickerWithLoading() {
+      // Only update with loading if content isn't loaded yet
+      if (!contentLoaded) {
+        updateTicker([{ text: "loading news..." }]);
+      }
+    }
+    
+    // Fallback to static content
+    function showStaticContent() {
+        const staticContent = [
+          "Visit our Telegram channel for more updates",
+        "Join us on Telegram: @https://t.me/riformalabel",
+          "Latest news and updates available on our Telegram"
+        ];
+        updateTicker(staticContent.map(text => ({ text })));
+    }
+    
+    function updateTicker(posts) {
+      const ticker = document.getElementById("telegram-ticker");
+      const tickerClone = document.getElementById("telegram-ticker-clone");
+      ticker.innerHTML = "";
+      tickerClone.innerHTML = "";
+      
+      if (!posts.length) {
+        const defaultItem = document.createElement("div");
+        defaultItem.className = "ticker__item";
+        defaultItem.textContent = "Follow us on Telegram: @" + CHANNEL_USERNAME;
+        ticker.appendChild(defaultItem.cloneNode(true));
+        tickerClone.appendChild(defaultItem.cloneNode(true));
+        return;
+      }
+      
+      posts.forEach(post => {
+        const item = document.createElement("div");
+        item.className = "ticker__item";
+        
+        // Get text content or default message
+        const text = post.text || "New post on our Telegram channel";
+        // Limit text length to avoid very long messages
+        const truncatedText = text.length > 150 ? text.substring(0, 147) + '...' : text;
+        
+        // Create a temporary container to parse HTML content
+        const temp = document.createElement('div');
+        // Replace line breaks with <br> tags
+        temp.innerHTML = truncatedText
+          .replace(/\n/g, '<br>')
+          // Preserve bold text
+          .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
+          // Preserve italic text
+          .replace(/\_(.*?)\_/g, '<i>$1</i>')
+          // Preserve links (basic URL detection)
+          .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>');
+        
+        // Use innerHTML to preserve formatting
+        item.innerHTML = temp.innerHTML;
+        
+        // Add to both tickers to ensure continuous loop
+        ticker.appendChild(item.cloneNode(true));
+        tickerClone.appendChild(item.cloneNode(true));
+      });
+    }
+    
+    // Initial fetch
+    fetchTelegramPosts();
+    
+    // Refresh every 5 minutes
+    setInterval(fetchTelegramPosts, 300000);
 
-@media (max-width: 810px) {
-    .title {
-      transform: scale(1.3, 1); /* Change the scale for mobile devices */
-    }
-  }
-  @media (max-width: 1080px) {
-    .title {
-      transform: scale(1.3, 1); /* Change the scale for mobile devices */
-    }
-  }
-  @media (max-width: 1440px) {
-    .title {
-      transform: scale(2, 3); /* Change the scale for mobile devices */
-    }
-  }
-  @media (max-width: 1280px) {
-    .title {
-      transform: scale(1.5, 3); /* Change the scale for mobile devices */
-    }
-  }
-  @media (max-width: 1920px) {
-    .title {
-      transform: scale(2.2, 1); /* Change the scale for mobile devices */
-    }
-  }
-  @media (max-width: 1600px) {
-    .title {
-      transform: scale(2, 1); /* Change the scale for mobile devices */
-    }
-  }
-  @media (max-width: 375px) {
-    .title {
-      transform: scale(1.4, 1); /* Change the scale for mobile devices */
-    }
-  }
-  @media (max-width: 428px) {
-    .title {
-      transform: scale(1.6, 2); /* Change the scale for mobile devices */
-    }
-  }
-  @media (max-width: 414px) {
-    .title {
-    text-align: right;
-      transform: scale(1.6, 1); /* Change the scale for mobile devices */
-    }
-  }
-  
+    // Get elements
+    const aboutTrigger = document.getElementById('about-trigger');
+    const aboutOverlay = document.getElementById('about-overlay');
+    const ticker = document.querySelector('.tele_ticker');
+
+    // Show about overlay
+    aboutTrigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        aboutOverlay.style.display = 'block';
+        ticker.style.display = 'none';
+    });
+
+    // Hide about overlay when clicking outside the content
+    aboutOverlay.addEventListener('click', (e) => {
+        if (e.target === aboutOverlay) {
+            aboutOverlay.style.display = 'none';
+            ticker.style.display = 'block';
+        }
+    });
+
+    // Prevent clicks inside the content from closing the overlay
+    document.querySelector('.about-content').addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+  </script>
+</body>
+</html>
