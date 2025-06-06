@@ -146,6 +146,27 @@
         .bio a:hover, .about-content a:hover {
             border-bottom-color: rgba(0,0,0,0.8);
         }
+
+        /* Add these styles for embedded version */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        /* Adjust container for embedded view */
+        #blocks-container {
+            margin-bottom: 150px; /* Add space for bio */
+        }
+        
+        /* Ensure bio is visible in embedded view */
+        .bio {
+            position: fixed;
+            bottom: 0;
+            background: rgba(179, 179, 179, 0.9);
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 
