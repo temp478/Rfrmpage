@@ -6,6 +6,8 @@ body {
     margin-top: 35px;
     padding: 0;
     position: relative;
+    min-height: 100vh;
+    padding-bottom: 100px; /* Add bottom padding to ensure content is reachable */
 }
 
 .bio{
@@ -70,11 +72,11 @@ z-index: 1;
 
 /*navbar options */
 .navbar {
-    position: fixed;
+     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    padding: 0px 0px;
+    padding: 0px 20px; /* Add horizontal padding */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -98,11 +100,13 @@ z-index: 1;
 }
 
 .links {
-    position: relative; /* Change from fixed to relative */
+   position: relative;
     display: flex;
     align-items: center;
+    gap: 15px; /* Add gap between links instead of relying on space-between */
     transform: scale(3, 2);
     transform-origin: top right;
+    margin-right: 20px; /* Add right margin to prevent content from touching the edge */
 }
 
 @media (max-width: 1920px) {
