@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIFORMA CATALOGUE</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+    
+      .tele_ticker {
+        margin-top: 50% ;
+        position: fixed;
+        width: 100%;
+        overflow: visible;
+        
+        
+      }
+        .ticker-wrap {
+            width: 100%;
+            background: rgba(255, 255, 255, 0);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 5px 0;
+            overflow: hidden;
+            border-top: 1px solid rgba(238, 238, 238, 0);
+            border-bottom: 1px solid rgba(238, 238, 238, 0);
+         
+            cursor: pointer;
+        }
+
+        .ticker {
+          
+            display: inline-block;
+            white-space: nowrap;
+            animation: ticker 100s linear infinite;
+            padding: 0;
+           
+        }
+
+        .ticker:hover, .ticker-clone:hover {
+            animation-play-state: paused;
+            cursor: default;
+        }
+
+        .ticker__item {
+          
+            display: inline-block;
+            padding: 0 30px;
+            text-transform: uppercase;  
+            font-weight: bold;
+            user-select: none;
+            /* Create gradient text effect */
+            background: linear-gradient(
+                90deg,
+                #000000,  /* Bright Red */
+                #ffffff,  /* Magenta */
+                #000000,  /* Cyan */
+                #1EFF1E,  /* Neon Green */
+                #f6f6f6,  /* Gold */
+                #000000   /* Back to Red */
+            );
+            background-size: 300% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: gradient 18s linear infinite;
+            text-shadow: 0 0 10px rgba(255,255,255,0.2);
+        }
+
+        /* Add gradient animation */
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 300% 50%;
+            }
+        }
+
+        .ticker-clone {
+          
+            white-space: nowrap;
+            padding: 0;
+            animation: ticker 100s linear infinite;
+            animation-delay: -50s;
+        }
+
+        @keyframes ticker {
+            0% { transform: translate3d(100%, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
+
+        .loading-bar-container {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 100%;
+            height: 2px;
+            background-color: #f0f0f0;
+            z-index: 10;
+        }
+
+        .loading-bar {
+            height: 100%;
+            width: 2%;
+            background-color: #ff1e1e;
+            transition: width 1.2s;
+        }
+
+        /* Add styles for about overlay */
+        .about-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: black;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .about-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1.2); /* 20% larger */
+            max-width: 80%;
+            padding: 2em;
+            background: rgba(255, 255, 255, 0.406);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 0 20px rgb(251, 251, 251);
+            cursor: default;
+        }
+
+        .bio a, .about-content a {
+            color: inherit;
+           
+            transition: border-color 0.2s ease;
+        }
+
+        .bio a:hover, .about-content a:hover {
+            border-bottom-color: rgba(0,0,0,0.8);
+        }
+    </style>
+</head>
+
+<body autoscroll="autoscroll">
+    <div id="blocks-container"></div>
+    <div class="navbar">
+      <div class="title">Riforma Catalogue<br></div>
+      <div class="links">
+        <a href="https://riformalabel.cargo.site/contact-form">contacts</a>
+        <a href="#" id="about-trigger">about</a>
+        <a href="https://t.me/riformalabel" target="_blank">telegram</a>
+        <span> &ensp;&ensp;&ensp;2020&rarr;2025</span>
+        
+        <div class="" href="#" id="channel-link" style="display: none;"></div>
+        
+      </div>
+      <div class="tele_ticker">
+        <a href="https://t.me/riformalabel" target="_blank">
+          <div class="ticker-wrap">
+            <div class="loading-bar-container" id="loading-bar-container">
+              <div class="loading-bar" id="loading-bar"></div>
+            </div>
+            <div class="ticker" id="telegram-ticker">
+              <div class="ticker__item">loading news...</div>
+            </div>
+            <div class="ticker-clone" id="telegram-ticker-clone">
+              <div class="ticker__item">loading news...</div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+            <div class="" href="#" id="channel-link" style="display: none;"></div>
+
+    <div class="bio">Riforma is an experimental music label based in Turin and Berlin, curated by <a href="https://kinked.bandcamp.com" target="_blank">Kinked</a>, <a href="https://adrianocava.bandcamp.com" target="_blank">Adriano Cava</a>, and <a href="https://riforma.bandcamp.com/album/re-malta-orlata" target="_blank">NOT399093</a>.
+      Dedicated to digital and tape releases, the practice of Riforma experiments different tools of expressions on medias such as paper, videos and hybridized formats.
+      The label catalogue is grounded inside and beyond the <a href="https://newweirditalia.cargo.site" target="_blank">New Weird Italia network</a>, shaped by an extensive experience hosting happenings, concerts and radio broadcastings in independent and secret venues/spaces both in Rome and Turin.
+      
+      From Tenco-Grime to Hyper-weirdness, posthuman sonic features to Abstract Concretism, FFT-Materialism to Glo-fi, the label encompasses and showcases a wide range of styles including: glidecore, screwgaze, blisscutters, derives of musique concrete and tape-ballardism.
+      
+      
+</div>
+
+    <div id="about-overlay" class="about-overlay">
+        <div class="about-content">
+            <div id="about-text">
+                Riforma is an experimental music label based in Turin and Berlin, curated by <a href="https://kinked.bandcamp.com" target="_blank">Kinked</a>, <a href="https://adrianocava.bandcamp.com" target="_blank">Adriano Cava</a>, and <a href="https://riforma.bandcamp.com/album/re-malta-orlata" target="_blank">NOT399093</a>.
+                Dedicated to digital and tape releases, the practice of Riforma experiments different tools of expressions on medias such as paper, videos and hybridized formats.
+                The label catalogue is grounded inside and beyond the <a href="https://newweirditalia.cargo.site" target="_blank">New Weird Italia network</a>, shaped by an extensive experience hosting happenings, concerts and radio broadcastings in independent and secret venues/spaces both in Rome and Turin.
+                
+                From Tenco-Grime to Hyper-weirdness, posthuman sonic features to Abstract Concretism, FFT-Materialism to Glo-fi, the label encompasses and showcases a wide range of styles including: glidecore, screwgaze, blisscutters, derives of musique concrete and tape-ballardism.
+            </div>
+        </div>
+    </div>
+
+    <div id="blocks-container"></div>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+   
+  <script>
+    // Channel configuration - NO API TOKEN NEEDED!
+    const CHANNEL_USERNAME = "rfrm22q"; 
+    
+    // Flag to track if loading is complete
+    let contentLoaded = false;
+    
+    // Fetch the latest messages from the public Telegram web version
+    async function fetchTelegramPosts() {
+      try {
+        // Reset loading flag
+        contentLoaded = false;
+        
+        // Show loading message while fetching
+        updateTickerWithLoading();
+        
+        // Start a loading animation that continues until content is loaded
+        startLoadingAnimation();
+        
+        // Try multiple CORS proxies in sequence until one works
+        const proxies = [
+          'https://api.allorigins.win/raw?url=',
+          'https://cors-anywhere.herokuapp.com/',
+          'https://corsproxy.io/?'
+        ];
+        
+        const telegramPublicUrl = `https://t.me/s/${CHANNEL_USERNAME}`;
+        
+        // Show the loading bar container
+        document.getElementById('loading-bar-container').style.display = 'block';
+        let loadingProgress = 0;
+        
+        // Start updating the loading bar
+        const loadingInterval = setInterval(() => {
+          loadingProgress += 2; // Increment progress
+          if (loadingProgress > 90) {
+            loadingProgress = 90; // Cap at 90% until actually loaded
+          }
+          document.getElementById('loading-bar').style.width = loadingProgress + '%';
+        }, 100);
+        
+        // Try each proxy in turn
+        let html = null;
+        let proxyUsed = null;
+        
+        for (const proxy of proxies) {
+          try {
+            console.log(`Trying proxy: ${proxy}`);
+            const finalUrl = proxy.includes('?url=') 
+              ? proxy + encodeURIComponent(telegramPublicUrl)
+              : proxy + telegramPublicUrl;
+              
+            const response = await fetch(finalUrl);
+            
+            if (response.ok) {
+              html = await response.text();
+              proxyUsed = proxy;
+              console.log(`Success with proxy: ${proxy}`);
+              break;
+            }
+          } catch (proxyError) {
+            console.log(`Proxy ${proxy} failed:`, proxyError);
+            // Continue to the next proxy
+          }
+        }
+        
+        if (!html) {
+          throw new Error("All proxies failed");
+        }
+        
+        // Parse the HTML response to extract messages
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        
+        // Extract messages from the Telegram web page
+        // Try different selectors that might match message text
+        const selectors = [
+          '.tgme_widget_message_text', 
+          '.tgme_widget_message_bubble', 
+          '.js-message_text'
+        ];
+        
+        let messageElements = [];
+        
+        for (const selector of selectors) {
+          const elements = doc.querySelectorAll(selector);
+          if (elements && elements.length > 0) {
+            messageElements = elements;
+            console.log(`Found ${elements.length} messages with selector: ${selector}`);
+            break;
+          }
+        }
+        
+        if (messageElements.length > 0) {
+          // Convert the NodeList to an array of message objects
+          const messages = Array.from(messageElements)
+            .map(element => ({
+              text: element.textContent.trim()
+            }))
+            .filter(msg => {
+              // Filter out empty messages
+              if (!msg.text) return false;
+              
+              // Filter out administrative messages
+              const adminMessages = [
+                "channel created",
+                "invited by",
+                "joined the channel",
+                "changed the channel",
+                "changed channel",
+                "pinned a message",
+                "changed the chat photo",
+                "changed the group photo",
+                "the group was renamed",
+                "the channel was renamed",
+                "changed group name",
+                "changed channel name",
+                "added a new admin",
+                "removed an admin",
+                "added admin",
+                "removed admin",
+                "created the group",
+                "created the channel"
+              ];
+              
+              // Check if the message contains any of the admin phrases
+              const lowerCaseText = msg.text.toLowerCase();
+              return !adminMessages.some(phrase => lowerCaseText.includes(phrase.toLowerCase()));
+            });
+          
+          // If we have actual content messages after filtering
+          if (messages.length > 0) {
+            // Complete the loading bar
+            document.getElementById('loading-bar').style.width = '100%';
+            
+            // Wait a moment with 100% loading bar
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            // Mark content as loaded and update ticker
+            contentLoaded = true;
+            clearInterval(loadingInterval);
+            
+            // Hide the loading bar after a short delay
+            setTimeout(() => {
+              document.getElementById('loading-bar-container').style.display = 'none';
+            }, 500);
+            
+            updateTicker(messages);
+          } else {
+            // If all were admin messages, show static content
+            // Complete the loading bar
+            document.getElementById('loading-bar').style.width = '100%';
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            contentLoaded = true;
+            clearInterval(loadingInterval);
+            
+            // Hide the loading bar after a short delay
+            setTimeout(() => {
+              document.getElementById('loading-bar-container').style.display = 'none';
+            }, 500);
+            
+            showStaticContent();
+          }
+        } else {
+          console.log("No message elements found in HTML");
+          
+          // Complete the loading bar
+          document.getElementById('loading-bar').style.width = '100%';
+          await new Promise(resolve => setTimeout(resolve, 500));
+          
+          contentLoaded = true;
+          clearInterval(loadingInterval);
+          
+          // Hide the loading bar after a short delay
+          setTimeout(() => {
+            document.getElementById('loading-bar-container').style.display = 'none';
+          }, 500);
+          
+          showStaticContent();
+        }
+      } catch (error) {
+        console.error("Error fetching Telegram posts:", error);
+        
+        // Complete the loading bar
+        document.getElementById('loading-bar').style.width = '100%';
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        contentLoaded = true;
+        
+        // Clear any loading intervals
+        clearInterval(loadingInterval);
+        
+        // Hide the loading bar after a short delay
+        setTimeout(() => {
+          document.getElementById('loading-bar-container').style.display = 'none';
+        }, 500);
+        
+        showStaticContent();
+      }
+    }
+    
+    // Track when loading starts
+    let loadingStartTime = 0;
+    let loadingInterval;
+    
+    // Start loading animation that continues until content is loaded
+    function startLoadingAnimation() {
+      loadingStartTime = Date.now();
+      
+      // Show loading message while content loads
+      updateTickerWithLoading();
+      
+      // Reset the loading bar
+      document.getElementById('loading-bar').style.width = '0%';
+      document.getElementById('loading-bar-container').style.display = 'block';
+    }
+    
+    // Show loading message
+    function updateTickerWithLoading() {
+      // Only update with loading if content isn't loaded yet
+      if (!contentLoaded) {
+        updateTicker([{ text: "loading news..." }]);
+      }
+    }
+    
+    // Fallback to static content
+    function showStaticContent() {
+        const staticContent = [
+          "Visit our Telegram channel for more updates",
+        "Join us on Telegram: @https://t.me/riformalabel",
+          "Latest news and updates available on our Telegram"
+        ];
+        updateTicker(staticContent.map(text => ({ text })));
+    }
+    
+    function updateTicker(posts) {
+      const ticker = document.getElementById("telegram-ticker");
+      const tickerClone = document.getElementById("telegram-ticker-clone");
+      ticker.innerHTML = "";
+      tickerClone.innerHTML = "";
+      
+      if (!posts.length) {
+        const defaultItem = document.createElement("div");
+        defaultItem.className = "ticker__item";
+        defaultItem.textContent = "Follow us on Telegram: @" + CHANNEL_USERNAME;
+        ticker.appendChild(defaultItem.cloneNode(true));
+        tickerClone.appendChild(defaultItem.cloneNode(true));
+        return;
+      }
+      
+      posts.forEach(post => {
+        const item = document.createElement("div");
+        item.className = "ticker__item";
+        
+        // Get text content or default message
+        const text = post.text || "New post on our Telegram channel";
+        // Limit text length to avoid very long messages
+        const truncatedText = text.length > 150 ? text.substring(0, 147) + '...' : text;
+        
+        // Create a temporary container to parse HTML content
+        const temp = document.createElement('div');
+        // Replace line breaks with <br> tags
+        temp.innerHTML = truncatedText
+          .replace(/\n/g, '<br>')
+          // Preserve bold text
+          .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
+          // Preserve italic text
+          .replace(/\_(.*?)\_/g, '<i>$1</i>')
+          // Preserve links (basic URL detection)
+          .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>');
+        
+        // Use innerHTML to preserve formatting
+        item.innerHTML = temp.innerHTML;
+        
+        // Add to both tickers to ensure continuous loop
+        ticker.appendChild(item.cloneNode(true));
+        tickerClone.appendChild(item.cloneNode(true));
+      });
+    }
+    
+    // Initial fetch
+    fetchTelegramPosts();
+    
+    // Refresh every 5 minutes
+    setInterval(fetchTelegramPosts, 300000);
+
+    // Get elements
+    const aboutTrigger = document.getElementById('about-trigger');
+    const aboutOverlay = document.getElementById('about-overlay');
+    const ticker = document.querySelector('.tele_ticker');
+
+    // Show about overlay
+    aboutTrigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        aboutOverlay.style.display = 'block';
+        ticker.style.display = 'none';
+    });
+
+    // Hide about overlay when clicking outside the content
+    aboutOverlay.addEventListener('click', (e) => {
+        if (e.target === aboutOverlay) {
+            aboutOverlay.style.display = 'none';
+            ticker.style.display = 'block';
+        }
+    });
+
+    // Prevent clicks inside the content from closing the overlay
+    document.querySelector('.about-content').addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+  </script>
+</body>
+</html>
