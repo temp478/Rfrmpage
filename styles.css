@@ -7,7 +7,7 @@ body {
     padding: 0;
     position: relative;
     min-height: 100vh;
-    padding-bottom: 100px; /* Add bottom padding to ensure content is reachable */
+    padding-bottom: 150px; /* Increase from 100px to accommodate footer */
 }
 
 .bio{
@@ -59,6 +59,7 @@ z-index: 1;
     gap: 0px;
     padding: 0px;
     margin-top: 80px; /* Adjust based on your navbar height */
+    margin-bottom: 100px; /* Add bottom margin to ensure content doesn't get hidden by footer */
 }
 
 .block {
@@ -109,6 +110,7 @@ z-index: 1;
     margin-right: 20px; /* Add right margin to prevent content from touching the edge */
 }
 
+
 @media (max-width: 1920px) {
     .links {
         transform: scale(2.2, 1);
@@ -135,6 +137,12 @@ z-index: 1;
         top: auto;
         right: auto;
     }
+
+        .bio {
+            display: none;
+        }
+
+        
 }
 
 @media (max-width: 428px) {
@@ -224,19 +232,19 @@ z-index: 1;
 /* Mobile styles */
 @media (max-width: 1096px) {
     body {
-        font-size: 12px; /* Set a discrete font size for mobile */
+        font-size: 12px;
         padding-left: 1%;
         padding-right: 1%;
         padding-top: 2%;
-        padding-bottom: 2%;
-
+        padding-bottom: 120px; /* Increase padding to ensure content isn't hidden by footer */
     }
    
     #blocks-container {
         display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Show 2 columns */
+        grid-template-columns: repeat(2, 1fr);
         gap: 0px;
         padding-top: 30px;
+        margin-bottom: 120px; /* Add bottom margin for mobile */
     }
 
     .block {
