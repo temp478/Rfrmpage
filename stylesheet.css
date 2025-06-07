@@ -1,0 +1,446 @@
+body {
+
+    background-color: #E7E7E7;
+    color: rgb(255, 255, 255);
+    font-family: 'Arial Unicode MS', Arial, sans-serif;
+    font-size: 16px; /* Adjust this value to match are.na's font size */
+    margin-top: 35px;
+    padding-top: 1px;
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 150px; /* Increase from 100px to accommodate footer */
+}
+
+.bio{
+    font: arial;
+    font-size: 2vh;
+    line-height: 90%;
+    left: 0;
+    position: fixed;
+    bottom: 0;
+    padding: 3.2%;
+        
+    text-align: justify;
+    box-shadow: 0 0 20px rgb(255, 255, 255); /* Glowing effect */
+    z-index: 1;
+    backdrop-filter: blur(6px);
+}
+
+/* Bouncing animation */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Hover effect */
+.social-links:hover {
+    transform: rotate(-15deg) scale(1.3) skew(-10deg); /* Reverse rotation and increase size */
+    box-shadow: 0 0 30px rgba(0, 255, 13, 0.8); /* Stronger glow on hover */
+    filter: blur(2px); /* Apply blur effect */
+}
+
+#blocks-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0px;
+    padding: 0px;
+    margin-top: 80px; /* Adjust based on your navbar height */
+    margin-bottom: 100px; /* Add bottom margin to ensure content doesn't get hidden by footer */
+}
+
+.block {
+    padding: 8px; /* Remove padding from the block */
+    border-radius: 0; /* No border radius */
+    overflow: hidden;
+    display: flex; /* Use flexbox for alignment */
+    flex-direction: column-reverse; /* Stack children vertically */
+    justify-content: flex-end; /* Align children to the bottom */
+}
+
+/*navbar options */
+.navbar {
+     position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0px 2px; /* Add horizontal padding */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(179, 179, 179, 0); /* Match body background with some transparency */
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    color: rgb(0, 0, 0);
+    font-family: 'Arial Unicode MS', Arial, sans-serif;
+    font-size: 1vh;
+    z-index: 1000; /* Increase z-index to ensure it's above other elements */
+}
+
+.title {
+    font-size: 1vh;
+    left: 0;
+    transform: scale(3, 2);
+    transform-origin: left;
+    margin-left: 20px; /* Add right margin to prevent content from touching the edge */
+    font-weight: bold;
+    line-height: 90%;
+    text-transform: uppercase;
+
+}
+
+.links {
+    padding-bottom: 20px;
+
+   position: relative;
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Add gap between links instead of relying on space-between */
+    transform: scale(3, 2);
+    transform-origin: top right;
+    margin-right: 20px; /* Add right margin to prevent content from touching the edge */
+}
+
+.links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.links a {
+    color: #1eff00; /* Base link color */
+    text-decoration: none; /* Remove underline by default */
+    transition: color 0.3s ease, filter 0.3s ease; /* Smooth transition for color and blur */
+    display: inline-block; /* Required for transform effects */
+}
+
+.links a:hover {
+    text-decoration: underline; /* Underline on hover */
+    color: rgb(255, 255, 255); /* Change color to red */
+    filter: blur(2px); /* Apply blur effect */
+    transition: color 0.5s ease, filter 0.3s ease; /* Smooth transition for color and blur */
+}
+
+.block img {
+    max-width: 100%;
+    border-radius: 0px;
+}
+
+.block a {
+    color: #1e90ff;
+    text-decoration: none;
+}
+
+.block a {
+    color: #40ff00; /* Base link color */
+    text-decoration: none; /* No underline by default */
+    transition: color 0.3s ease, filter 0.3s ease; /* Smooth transition for color and blur */
+}
+
+.block a:hover {
+    text-decoration: none; /* Keep no underline on hover */
+    color: rgb(255, 255, 255); /* Change color to red */
+}
+
+.block {
+    font-size: 0.9rem;
+    color: rgb(255, 255, 255); /* Change color to white */
+    position: relative;
+    overflow: hidden; /* Hide overflow for color reveal */
+    filter: grayscale(100%); /* Start with black and white */
+    transition: filter 0.3s ease; /* Smooth transition for grayscale */
+}
+
+.block img {
+    max-width: 100%;
+    border-radius: 0px;
+}
+
+.block a {
+    color: #40ff00; /* Base link color */
+    text-decoration: none; /* No underline by default */
+    transition: color 0.3s ease; /* Smooth transition for color */
+}
+
+.block:hover {
+    filter: grayscale(0%); /* Remove grayscale on hover */
+}
+
+.thumbnail {
+    max-width: 100%;
+    border-radius: 0px;
+}
+
+/* Aggiungo l'effetto gradiente per i link in bio e about */
+.bio a, .about-content a {
+    color: transparent;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    /* Create gradient text effect */
+    background: linear-gradient(
+        90deg,
+        #000000,  /* Black */
+        #ffffff,  /* White */
+        #9cfe6a,  /* Black */
+        #1EFF1E,  /* Neon Green */
+        #f6f6f6,  /* Light Gray */
+        #000000   /* Black */
+    );
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: gradient 18s linear infinite;
+    text-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+
+/* Aggiungo l'animazione gradiente */
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 300% 50%;
+    }
+}
+
+/* Media Queries */
+@media screen and (max-width: 1043px) {
+    .navbar {
+        padding: 0px 1px; /* Riduci il padding orizzontale */
+    }
+    
+    .title {
+        font-size: 0.9vh; /* Riduci la dimensione del titolo */
+        transform: scale(2.7, 1.8); /* Riduci leggermente la scala */
+        margin-left: 15px; /* Riduci il margine sinistro */
+    }
+    
+    .links {
+        transform: scale(2.7, 1.8); /* Riduci leggermente la scala */
+        margin-right: 15px; /* Riduci il margine destro */
+        gap: 10px; /* Riduci lo spazio tra i link */
+    }
+    
+    .links a {
+        margin-left: 10px; /* Riduci lo spazio tra i link */
+    }
+}
+
+@media screen and (max-width: 847px) {
+    .navbar {
+        padding: 0px 0px; /* Rimuovi il padding orizzontale */
+    }
+    
+    .title {
+        font-size: 0.8vh; /* Riduci ulteriormente la dimensione del titolo */
+        transform: scale(2.5, 1.6); /* Riduci ulteriormente la scala */
+        margin-left: 10px; /* Riduci ancora il margine sinistro */
+    }
+    
+    .links {
+        transform: scale(2.5, 1.6); /* Riduci ulteriormente la scala */
+        margin-right: 10px; /* Riduci ancora il margine destro */
+        gap: 5px; /* Riduci ancora lo spazio tra i link */
+    }
+    
+    .links a {
+        margin-left: 5px; /* Riduci ancora lo spazio tra i link */
+    }
+    
+    /* Riduzione dimensione testo ticker */
+    .ticker__item {
+        font-size: 19px; /* Riduci di 1 punto la dimensione del testo nel ticker */
+    }
+}
+
+@media screen and (max-width: 678px) {
+    .navbar {
+        flex-direction: column; /* Cambia la direzione del flexbox a colonna */
+        align-items: flex-start; /* Allinea gli elementi a sinistra */
+        padding: 5px 0; /* Aggiungi un po' di padding verticale */
+    }
+    
+    .title {
+        font-size: 1.2vh; /* Aumenta la dimensione del font */
+        transform: scale(3, 2); /* Aumenta la scala per rendere il titolo più grande */
+        margin-left: 15px;
+        margin-bottom: 8px; /* Aggiungi spazio sotto il titolo */
+        width: 90%; /* Assicura che occupi quasi tutta la larghezza */
+    }
+    
+    .links {
+        transform: scale(2.5, 1.8); /* Aumenta la scala per rendere i link più grandi */
+        margin-right: 0; /* Rimuovi il margine destro */
+        margin-left: 15px; /* Aggiungi margine sinistro */
+        margin-top: 5px; /* Aggiungi spazio sopra i link */
+        padding-bottom: 8px; /* Aggiungi spazio sotto i link */
+        transform-origin: left top; /* Cambia l'origine della trasformazione */
+        width: 90%; /* Assicura che occupi quasi tutta la larghezza */
+    }
+    
+    /* Regola la posizione del ticker per adattarsi alla nuova navbar */
+    .tele_ticker {
+        margin-top: 20%; /* Aumenta il margine superiore */
+    }
+    
+    /* Regola la posizione del container dei blocchi */
+    #blocks-container {
+        margin-top: 120px; /* Aumenta il margine superiore */
+        grid-template-columns: repeat(3, 1fr) !important; /* Cambia da 4 a 3 colonne */
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .navbar {
+        flex-direction: column; /* Mantieni la direzione colonna */
+        align-items: center; /* Centra gli elementi orizzontalmente */
+        padding: 8px 0; /* Aggiungi un po' più di padding verticale */
+        z-index: 1000;
+    }
+    
+    .title {
+        font-size: 1.3vh; /* Leggermente più grande */
+        transform: scale(3, 2); /* Mantieni la scala */
+        margin-left: 0; /* Rimuovi il margine sinistro per centrare */
+        text-align: center; /* Centra il testo */
+        width: 100%; /* Larghezza completa */
+        display: block !important; /* Forza la visualizzazione */
+        visibility: visible !important; /* Assicura che sia visibile */
+        opacity: 1 !important; /* Assicura che sia opaco */
+        position: relative; /* Ripristina la posizione normale */
+        line-height: normal; /* Ripristina line-height normale */
+        transform-origin: center; /* Imposta l'origine della trasformazione al centro */
+    }
+    
+    .links {
+        transform: scale(2.5, 1.8); /* Mantieni la scala */
+        margin-left: 0; /* Rimuovi il margine sinistro per centrare */
+        margin-right: 0; /* Nessun margine destro */
+        transform-origin: center top; /* Cambia l'origine della trasformazione al centro */
+        width: 100%; /* Larghezza completa */
+        justify-content: center; /* Centra gli elementi all'interno */
+        display: flex; /* Assicurati che sia un flex container */
+        z-index: 1000;
+    }
+    
+    /* Nascondi la bio */
+    .bio {
+        display: none;
+    }
+    
+    /* Regola la posizione del ticker */
+    .tele_ticker {
+        margin-top: calc(25% + 2px); /* Aumenta il margine superiore di 2px */
+    }
+    
+    /* Cambia i blocchi a 2 colonne */
+    #blocks-container {
+        margin-top: 130px; /* Aumenta ancora il margine superiore */
+        grid-template-columns: repeat(2, 1fr) !important; /* Cambia a 2 colonne */
+        padding-bottom: 20px; /* Aggiungi padding inferiore poiché la bio è nascosta */
+    }
+    
+    /* Rimuovi il padding-bottom dal body perché la bio è nascosta */
+    body {
+        padding-bottom: 20px;
+    }
+}
+
+/* Responsività completa per schermi molto piccoli */
+@media screen and (max-width: 432px) {
+    .navbar {
+        padding: 6px 0; /* Riduci leggermente il padding verticale */
+    }
+    
+    .title {
+        /* Dimensione del titolo responsive basata sulla larghezza della viewport */
+        font-size: calc(0.8vh + 0.5vw);
+        /* Scala dinamica basata sulla larghezza dello schermo */
+        transform: scale(calc(2 + 10/min(100vw, 432px)), calc(1.5 + 5/min(100vw, 432px)));
+        margin-bottom: 6px; /* Riduci lo spazio sotto il titolo */
+    }
+    
+    .links {
+        /* Scala dinamica basata sulla larghezza dello schermo */
+        transform: scale(calc(1.8 + 7/min(100vw, 432px)), calc(1.4 + 4/min(100vw, 432px)));
+        margin-top: 3px; /* Riduci lo spazio sopra i link */
+        /* Riduci lo spazio tra i link in base alla larghezza */
+        gap: calc(3px + 0.3vw);
+    }
+    
+    .links a {
+        /* Riduci il margine tra i link in base alla larghezza */
+        margin-left: calc(2px + 0.3vw);
+    }
+    
+    /* Adatta la posizione dei blocchi */
+    #blocks-container {
+        margin-top: calc(100px + 5vw); /* Margine superiore adattivo */
+    }
+}
+
+/* Per schermi molto piccoli, elimina le trasformazioni e usa la larghezza completa */
+@media screen and (max-width: 400px) {
+    .navbar {
+
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 2px 0;
+    }
+    
+    .title {
+        /* Rimuovi trasformazione di scala */
+        transform: none !important;
+        width: 100%;
+        font-size: 4vh;
+        font-weight: bold;
+        margin: 0;
+        box-sizing: border-box;
+        line-height: 1.2;
+        text-transform: uppercase;
+    }
+    
+    .links {
+        /* Rimuovi trasformazione di scala */
+        transform: none !important;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 5px 0;
+        padding: 0 5px;
+        box-sizing: border-box;
+
+    }
+    
+    .links a, .links span {
+        margin: 0 5px;
+        font-size: 2vh;
+        white-space: nowrap;
+    }
+    
+    /* Adatta il ticker e i blocchi */
+   
+    
+    #blocks-container {
+        margin-top: 120px; /* Valore fisso */
+    }
+}
+
+/* Riduci dimensione del testo "about" da 460px */
+@media screen and (max-width: 460px) {
+  
+    .links a#about-trigger {
+        font-size: 0.8vh;
+        transform: scale(0.9);
+        transform-origin: center;
+    }
+    
+}
